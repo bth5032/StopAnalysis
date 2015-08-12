@@ -22,10 +22,9 @@ NGLIBS        += -lMinuit
 GLIBS          = $(filter-out -lNew, $(NGLIBS))
 
 #COREPATH       = ../../CORE
-COREPATH       = $(HOME)/CORE
+COREPATH       = $(HOME)/GIT/CORE
 TOOLSPATH      = $(COREPATH)/Tools
 DORKYPATH      = $(TOOLSPATH)/dorky
-
 
 CXXFLAGS       += -I$(COREPATH)
 CXXFLAGS       += -I$(TOOLSPATH)
