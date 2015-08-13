@@ -45,7 +45,7 @@ vector<TString> load(char *type, const char *filename, char *input){
       else
       {
         IN.getline(buffer, 500, '\n');
-        sscanf(buffer, strcat("Path\t%s"), StringValue);
+        sscanf(buffer, "Path\t%s", StringValue);
         cout << "The data are not available locally, reading through hadoop."
       }
 
