@@ -13,9 +13,11 @@ using namespace std;
 vector<TString> load(char *type, const char *filename, char *input){
 
   vector<TString> output;
+
   char buffer[500];
   char StringValue[1000];
   ifstream IN(input);
+
   while( IN.getline(buffer, 500, '\n') ){
     // ok = false;
     if (buffer[0] == '#') {
@@ -26,8 +28,26 @@ vector<TString> load(char *type, const char *filename, char *input){
       IN.getline(buffer, 500, '\n');
       sscanf(buffer, "Name\t%s", StringValue);
       if((string)StringValue==(string)type) add=true;
+      
       IN.getline(buffer, 500, '\n');
-      sscanf(buffer, "Path\t%s", StringValue);
+      sscanf(buffer, strcat("Path\t%s"), StringValue);
+      
+      //The first time we read in the path into 
+      //StringValue, we should get the "local path" from sample.dat
+      //We check to see if files are available locally
+      //otherwise we read in one more time to get the path
+      //through the hadoop fuse mount.
+      if(fstream file(StringValue).good())
+      {
+        cout << "The data are available locally, using local copies for baby making."
+      }
+      else
+      {
+        IN.getline(buffer, 500, '\n');
+        sscanf(buffer, strcat("Path\t%s"), StringValue);
+        cout << "The data are not available locally, reading through hadoop."
+      }
+
       if(add){
 	std::ostringstream addStream;
 	addStream << StringValue << filename;

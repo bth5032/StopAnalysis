@@ -9,9 +9,14 @@ Output = logs/condorLog_ARG1_ARG3.stdout
 Error = logs/condorLog_ARG1_ARG3.stderr
 Log = logs/condorLog_ARG1_ARG3.log
 +Owner = undefined
+
 notify_user = bthashemi@ucsd.edu
 x509userproxy = /tmp/x509up_u31589
+
 Executable = condorExecutable.sh
 Transfer_executable = True
 arguments = ARG1 ARG2 ARG3 ARG4
+
++IOSlot = True
+
 Queue 1
