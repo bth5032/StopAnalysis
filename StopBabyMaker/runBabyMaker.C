@@ -30,23 +30,23 @@ vector<TString> load(char *type, const char *filename, char *input){
       if((string)StringValue==(string)type) add=true;
       
       IN.getline(buffer, 500, '\n');
-      sscanf(buffer, "Path\t%s", StringValue);
-      
+      sscanf(buffer, "LocalPath\t%s", StringValue);
+
       //The first time we read in the path into 
       //StringValue, we should get the "local path" from sample.dat
       //We check to see if files are available locally
       //otherwise we read in one more time to get the path
       //through the hadoop fuse mount.
-      FILE *fileptr = fopen(StringValue); 
-      if( fileptr !=NULL)
+      FILE *fileptr = fopen(StringValue, "r"); 
+      if( fileptr != NULL && add)
       {
-        cout << "The data are available locally, using local copies for baby making."
+        cout << "The data are available locally, using local copies for baby making.\n";
       }
-      else
+      else if (add)
       {
         IN.getline(buffer, 500, '\n');
-        sscanf(buffer, "Path\t%s", StringValue);
-        cout << "The data are not available locally, reading through hadoop."
+        sscanf(buffer, "HadoopPath\t%s", StringValue);
+        cout << "The data are not available locally, reading through hadoop.\n";
       }
 
       if(add){
