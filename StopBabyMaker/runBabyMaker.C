@@ -30,7 +30,7 @@ vector<TString> load(char *type, const char *filename, char *input){
       if((string)StringValue==(string)type) add=true;
       
       IN.getline(buffer, 500, '\n');
-      sscanf(buffer, strcat("Path\t%s"), StringValue);
+      sscanf(buffer, "Path\t%s", StringValue);
       
       //The first time we read in the path into 
       //StringValue, we should get the "local path" from sample.dat
