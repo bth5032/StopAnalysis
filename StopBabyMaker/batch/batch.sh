@@ -56,50 +56,14 @@ fi
 lineWithPath=`sed -n /path/= voms_status.txt`
 pathToProxy=`awk -v var="$lineWithPath" 'NR==var {print $3}' voms_status.txt`
 
-#Do all this stuff once per sample
+#Construct list of all the sample files which will be used for this analysis
 for sample in $sampleList
 do
-  #echo "Processing $sample"
-  
-  #Make a list of all the files on hadoop you want to run on
-  sample_dir=""
 
-  #number of lines in sample.dat
-  nLines=`wc -l < ../sample.dat`
+  local_sample_dir=`cat ../sample.dat | grep -A2 $sample | grep "LocalPath" | cut -d ' ' -f2`
+  hadoop_sample_dir=`cat ../sample.dat | grep -A2 $sample | grep "HadoopPath" | cut -d ' ' -f2`
 
-  samplename=""
-  sampledir=""
-
-  #loop to find sample_dir
-  for (( i = 1; i <= $nLines; i++ ))
-  do
-
-    #get string in sample.dat, temptwo is either the samplename or the sampledirectory
-    temp=`awk "NR==$i" ../sample.dat`
-    tempone=`echo $temp |cut -d' ' -f1`
-    temptwo=`echo $temp |cut -d' ' -f2`
-
-    #store the sample name
-    if [ "$tempone" == "Name" ]; then
-        samplename="$temptwo"
-    fi
-
-    #store the sampledir
-    if [ "$tempone" == "Path" ]; then
-        sampledir="$temptwo"
-	#if sampledir is in the list make it sample_dir
-        if [ "$sample" == "$samplename" ]; then
-           sample_dir="$sampledir"
-        fi
-    fi
-    #sample_dir already found
-    if [ "$sample_dir$" == "$sampledir" ]; then
-       break
-    fi
-
-  done
-  
-  for file in `/bin/ls $sample_dir/merged_ntuple_*.root`; do
+  for file in `/bin/ls $hadoop_sample_dir/merged_ntuple_*.root`; do
 
     number_temp=${file##*/merged_ntuple_}
     number=${number_temp%*.root}
