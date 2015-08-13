@@ -37,7 +37,8 @@ vector<TString> load(char *type, const char *filename, char *input){
       //We check to see if files are available locally
       //otherwise we read in one more time to get the path
       //through the hadoop fuse mount.
-      if(fstream file(StringValue).good())
+      FILE *fileptr = fopen(StringValue); 
+      if( fileptr !=NULL)
       {
         cout << "The data are available locally, using local copies for baby making."
       }
