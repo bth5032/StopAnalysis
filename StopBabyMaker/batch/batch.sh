@@ -66,6 +66,7 @@ do
   local_sample_dir=`cat ../sample.dat | grep -A2 $sample | grep "LocalPath" | cut -d ' ' -f2`
   hadoop_sample_dir=`cat ../sample.dat | grep -A2 $sample | grep "HadoopPath" | cut -d ' ' -f2`
 
+>&2 echo $hadoop_sample_dir
 >&2 echo "for loop"
 
   for file in `/bin/ls $hadoop_sample_dir/merged_ntuple_*.root`; do
