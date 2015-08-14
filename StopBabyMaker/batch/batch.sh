@@ -16,11 +16,8 @@ verbose="false"
 #Set directory to copy results to when finished
 copy_dir="$HOME/test/"
 if [ ! -d $copy_dir/merged_files ]; then
-    >&2 echo "1"
     mkdir $copy_dir/merged_files
-    >&2 echo "2"
 fi
->&2 echo "3"
 
 #Check that log file folder and tarball files exists
 if [ ! -d logs ]; then echo "Run . copy.sh first!"; return 1; fi
@@ -66,14 +63,9 @@ do
   local_sample_dir=`cat ../sample.dat | grep -A2 $sample | grep "LocalPath" | cut -d ' ' -f2`
   hadoop_sample_dir=`cat ../sample.dat | grep -A2 $sample | grep "HadoopPath" | cut -d ' ' -f2`
 
->&2 echo "for loop"
-
   for file in `/bin/ls $hadoop_sample_dir/merged_ntuple_*.root`; do
->&2 echo "5"
     number_temp=${file##*/merged_ntuple_}
->&2 echo "6"
     number=${number_temp%*.root}
->&2 echo "7"
     #Except they've finished
     if [ -e $copy_dir/${sample}_${number}.root ] 
     then 
