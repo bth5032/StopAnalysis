@@ -12,6 +12,7 @@ do
 	then
 		break
 	fi
+	sleep 10
 done 
 
 echo "Time at finish: " `date +%s`
