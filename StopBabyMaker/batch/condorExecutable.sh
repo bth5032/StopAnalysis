@@ -79,4 +79,5 @@ ls -l `pwd`/${NAME}_${NUMBER}.root
 echo "copying.  LS is: "
 ls -l ${NAME}_${NUMBER}.root
 
-lcg-cp -b -D srmv2 --vo cms --connect-timeout 2400 --verbose file://`pwd`/${NAME}_$NUMBER.root srm://bsrm-3.t2.ucsd.edu:8443/srm/v2/server?SFN=${COPYDIR}/${NAME}_$NUMBER.root
+#lcg-cp -b -D srmv2 --vo cms --connect-timeout 2400 --verbose file://`pwd`/${NAME}_$NUMBER.root srm://bsrm-3.t2.ucsd.edu:8443/srm/v2/server?SFN=${COPYDIR}/${NAME}_$NUMBER.root
+#scp ${NAME}_${NUMBER}.root uaf-4.t2.ucsd.edu:$COPYDIR
