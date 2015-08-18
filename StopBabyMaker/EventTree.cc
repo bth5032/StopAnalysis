@@ -3,6 +3,8 @@
 #include "CMS3.h"
 #include "VertexSelections.h"
 #include "StopSelections.h"
+#include "MetSelections.h"
+
 using namespace tas; 
 EventTree::EventTree ()
 {
@@ -41,13 +43,14 @@ void EventTree::FillCommon (const std::string &root_file_name)
 
     is_data = evt_isRealData();
 
-    if(is_data){
+///the recommended met filters//
         filt_cscbeamhalo = filt_cscBeamHalo();
+        filt_eebadsc = filt_eeBadSc();
+        filt_goodvtx = filt_goodVertices(); //not working but same as our 1goodvertex requirement
+        filt_hbhenoise = hbheNoiseFilter();
+////////////// 
         filt_ecallaser = filt_ecalLaser();
         filt_ecaltp = filt_ecalTP();
-        filt_eebadsc = filt_eeBadSc();
-        filt_goodvtx = filt_goodVertices();
-        filt_hbhenoise = filt_hbheNoise();
         filt_hcallaser = filt_hcalLaser();
         filt_met = filt_metfilter();
         filt_trkfail = filt_trackingFailure();
@@ -55,8 +58,6 @@ void EventTree::FillCommon (const std::string &root_file_name)
         filt_trkPOG_tmc = filt_trkPOG_logErrorTooManyClusters();
         filt_trkPOG_tms = filt_trkPOG_toomanystripclus53X();
         filt_eff = evt_filt_eff();
-
-    }
 
     if (!is_data)
     {
@@ -205,6 +206,10 @@ void EventTree::Reset ()
     HLT_SingleMu17         = -9999.;
     HLT_SingleMu20         = -9999.;
     HLT_SingleMu24         = -9999.;
+    HLT_MonoCentPFJet80_METNoMu90_MHTNoMu90_IDTight = -9999.;
+    HLT_MET90_MHT90_IDTight                         = -9999.;
+    HLT_METNoMu90_NoiseCleaned_MHTNoMu90_IDTight    = -9999.; 
+
     
     EA_all_rho                  = -9999.;
     EA_allcalo_rho              = -9999.; 
@@ -359,6 +364,9 @@ void EventTree::SetBranches (TTree* tree)
     tree->Branch("HLT_SingleMu17", &HLT_SingleMu17);
     tree->Branch("HLT_SingleMu20", &HLT_SingleMu20);
     tree->Branch("HLT_SingleMu24", &HLT_SingleMu24);
+    tree->Branch("HLT_MonoCentPFJet80_METNoMu90_MHTNoMu90_IDTight", &HLT_MonoCentPFJet80_METNoMu90_MHTNoMu90_IDTight);
+    tree->Branch("HLT_MET90_MHT90_IDTight", &HLT_MET90_MHT90_IDTight);
+    tree->Branch("HLT_METNoMu90_NoiseCleaned_MHTNoMu90_IDTight", &HLT_METNoMu90_NoiseCleaned_MHTNoMu90_IDTight); 
     tree->Branch("pu_weight", &pu_weight); 
     tree->Branch("lep_sf", &lep_sf); 
     tree->Branch("btag_sf", &btag_sf); 
