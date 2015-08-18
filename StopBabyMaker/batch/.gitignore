@@ -9,3 +9,5 @@ temp.txt
 voms_status.txt
 logs
 fileNames.txt
+*.output
+*.error

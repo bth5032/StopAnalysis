@@ -2,7 +2,7 @@
 # until there are no more files submitted by the user.
 
 echo "Unix time at start: " `date +%s`
-./batch.sh
+. batch.sh
 
 while 1
 do
