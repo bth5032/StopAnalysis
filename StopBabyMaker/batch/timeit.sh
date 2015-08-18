@@ -9,7 +9,9 @@ echo "Unix time at start: " `date +%s`
 while [ 1 ]
 do
 	if [[ $(condor_q | grep `whoami`) == "" ]]
+	then
 		break
+	fi
 done 
 
 echo "Time at finish: " `date +%s`
