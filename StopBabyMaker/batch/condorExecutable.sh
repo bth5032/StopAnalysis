@@ -71,7 +71,7 @@ make clean
 make
 
 # Run babyMaker
-./runBabyMaker "$NAME" $NEVENTS $NUMBER "./"
+time ./runBabyMaker "$NAME" $NEVENTS $NUMBER "./"
 ls -l `pwd`/${NAME}_${NUMBER}.root
 
 # Copy the output to the output directory via lcg-cp
