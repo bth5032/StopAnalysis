@@ -45,39 +45,24 @@ pushd /cvmfs/cms.cern.ch/slc6_amd64_gcc491/cms/cmssw/CMSSW_7_4_1/src/
 eval `scramv1 runtime -sh`
 popd
 
-# Make supporting libs
-cd CORE/
-make clean
-make
-cd ../
+export SAbin=/nfs-7/t2tas/Software/StopAnalysisCMSSW/src/StopAnalysis/StopBabyMaker/
+export CMSSWdir=/nfs-7/t2tas/Software/StopAnalysisCMSSW/
 
-#cd Software/MiniFWLite/
-#make clean
-#make
-#cd ../../
+pushd $CMSSWdir
+cmsenv
+popd
 
-#cd Tools/
-#make clean
-#make
-#cd ../
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SAbin
+ln -s $SAbin/json_files json_files
 
-cd StopAnalysis/StopBabyMaker/stop_variables/
-make clean
-make
-cd ../
 
-#cd /home/users/isuarez/ROOT6/babymaker_main/StopAnalysis/StopBabyMaker/
-make clean
-make
-
-# Run babyMaker
-time ./runBabyMaker "$NAME" $NEVENTS $NUMBER "./"
+time $SAbin/runBabyMaker "$NAME" $NEVENTS $NUMBER "./"
 ls -l `pwd`/${NAME}_${NUMBER}.root
 
 # Copy the output to the output directory via lcg-cp
 #  This preserves grid functionality
-echo "copying.  LS is: "
-ls -l ${NAME}_${NUMBER}.root
+#echo "copying.  LS is: "
+#ls -l ${NAME}_${NUMBER}.root
 
 #lcg-cp -b -D srmv2 --vo cms --connect-timeout 2400 --verbose file://`pwd`/${NAME}_$NUMBER.root srm://bsrm-3.t2.ucsd.edu:8443/srm/v2/server?SFN=${COPYDIR}/${NAME}_$NUMBER.root
 #scp ${NAME}_${NUMBER}.root uaf-4.t2.ucsd.edu:$COPYDIR
