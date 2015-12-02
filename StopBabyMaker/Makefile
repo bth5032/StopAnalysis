@@ -21,7 +21,7 @@ NGLIBS         = $(ROOTGLIBS)
 NGLIBS        += -lMinuit
 GLIBS          = $(filter-out -lNew, $(NGLIBS))
 
-COREPATH       = $(HOME)/CORE
+COREPATH       = /home/users/bhashemi/Projects/GIT/stop1l/CMSSW_7_4_1_patch1/src/CORE
 TOOLSPATH      = $(COREPATH)/Tools
 DORKYPATH      = $(TOOLSPATH)/dorky
 

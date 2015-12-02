@@ -13,3 +13,5 @@ runBabyMaker
 LinkDef.cc
 LinkDef_out.*
 *rdict.pcm
+
+test_sample_files
