@@ -43,7 +43,7 @@ function doItAll {
 		mv smartsubmit.root baby1.root
 		rm json_files
 		rm jecfiles
-		#rm aux_samples.dat
+		rm aux_samples.dat
 	else
 		echo "No files given"
 	fi
