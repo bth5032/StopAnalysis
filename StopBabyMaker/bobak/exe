@@ -8,6 +8,10 @@ function doItAll {
 	then
 	    dpath=`dirname $1`'/'
 
+	    echo "Directory path: $dpath"
+	    echo "checking for file"
+	    ls $1
+
 		if [[ ! -d test_output_dir ]]
 		then 
 			mkdir test_output_dir

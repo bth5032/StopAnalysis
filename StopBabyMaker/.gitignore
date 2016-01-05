@@ -14,4 +14,8 @@ LinkDef.cc
 LinkDef_out.*
 *rdict.pcm
 
+## Bobak Specific
 test_sample_files
+
+#Sublime Files
+*.sublime*
