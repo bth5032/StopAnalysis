@@ -243,6 +243,8 @@ int babyMaker::looper(TChain* chain, char* output_name, int nEvents, char* path)
   TBenchmark *bmark = new TBenchmark();
   bmark->Start("benchmark");
   
+  unsigned int IOTEST_FLAG = 1;
+
   //
   //Set up loop over chain
   //
@@ -376,6 +378,12 @@ int babyMaker::looper(TChain* chain, char* output_name, int nEvents, char* path)
       //
       InitBabyNtuple();
 
+      //===========================
+      //  FROM BOBAK
+      //  Load entire file
+      //===========================
+      cms3.LoadAllBranches();
+      if (IOTEST_FLAG){
       //
       // If data, check against good run list
       //
@@ -1182,7 +1190,7 @@ int babyMaker::looper(TChain* chain, char* output_name, int nEvents, char* path)
       // Fill Tree
       //
       BabyTree->Fill();
-
+      } //IOTEST_FLAG If
     
     }//close event loop
     

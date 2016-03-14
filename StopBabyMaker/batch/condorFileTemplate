@@ -1,5 +1,5 @@
 universe=grid
-Grid_Resource=condor cmssubmit-r1.t2.ucsd.edu glidein-collector.t2.ucsd.edu
+Grid_Resource=condor osg-gw-4.t2.ucsd.edu osg-gw-4.t2.ucsd.edu:9619
 +DESIRED_Sites="T2_US_UCSD"
 Should_Transfer_Files = YES
 WhenToTransferOutput = ON_EXIT

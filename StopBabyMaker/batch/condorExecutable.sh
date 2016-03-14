@@ -4,8 +4,8 @@
 RIGHT_NOW=`date +"%Y%m%d %H%M%S"`
 echo ""
 echo "*************************************"
-echo "  Beginning Condor Job "
-echo "    TIME = $RIGHT_NOW "
+echo "Beginning Condor Job "
+echo "START_TIME = $RIGHT_NOW"
 echo "*************************************"
 echo ""
 
@@ -24,13 +24,14 @@ export MAKER_NAME=$6
 RIGHT_NOW=`date +"%Y%m%d %H%M%S"`
 echo ""
 echo "*************************************"
-echo "  Setting up environment... "
-echo "    TIME = $RIGHT_NOW "
+echo "Setting up environment... "
+echo "ENV_TIME = $RIGHT_NOW "
 echo "*************************************"
 echo ""
 
 # Show where you are
 hostname
+echo "MACHINE: "`uname -n`
 
 # Show g++ version
 echo " " 
@@ -54,8 +55,8 @@ cd $OLDDIR
 RIGHT_NOW=`date +"%Y%m%d %H%M%S"`
 echo ""
 echo "*************************************"
-echo "  Unpack the tarball... "
-echo "    TIME = $RIGHT_NOW "
+echo "Unpack the tarball... "
+echo "TAR_TIME = $RIGHT_NOW "
 echo "*************************************"
 echo ""
 
@@ -78,36 +79,36 @@ cd $MAKER_NAME/
 RIGHT_NOW=`date +"%Y%m%d %H%M%S"`
 echo ""
 echo "*************************************"
-echo "  Running babyMaker... "
-echo "    TIME = $RIGHT_NOW "
+echo "Running babyMaker... "
+echo "ROOT_START = $RIGHT_NOW "
 echo "*************************************"
 echo ""
 
-./runBabyMaker "$NAME" $NEVENTS $NUMBER "./"
-ls -l `pwd`/${NAME}_${NUMBER}.root
-
+time ./runBabyMaker "$NAME" $NEVENTS $NUMBER "./"
 
 # Copy the output to the output directory via lcg-cp
 RIGHT_NOW=`date +"%Y%m%d %H%M%S"`
 echo ""
 echo "*************************************"
-echo "  Copy output file with lcg-cp... "
-echo "    TIME = $RIGHT_NOW "
+echo "Copy output file with lcg-cp... "
+echo "ROOT_END = $RIGHT_NOW "
 echo "*************************************"
 echo ""
+
+ls -l `pwd`/${NAME}_${NUMBER}.root
 
 #  This preserves grid functionality
 echo "copying.  LS is: "
 ls -l ${NAME}_${NUMBER}.root
 
-lcg-cp -b -D srmv2 --vo cms --connect-timeout 2400 --verbose file://`pwd`/${NAME}_${NUMBER}.root srm://bsrm-3.t2.ucsd.edu:8443/srm/v2/server?SFN=${COPYDIR}/${NAME}_${NUMBER}.root
+#lcg-cp -b -D srmv2 --vo cms --connect-timeout 2400 --verbose file://`pwd`/${NAME}_${NUMBER}.root srm://bsrm-3.t2.ucsd.edu:8443/srm/v2/server?SFN=${COPYDIR}/${NAME}_${NUMBER}.root
 
 
 # Job Complete
 RIGHT_NOW=`date +"%Y%m%d %H%M%S"`
 echo ""
 echo "*************************************"
-echo "  JOB COMPLETE! "
-echo "    TIME = $RIGHT_NOW "
+echo "JOB COMPLETE! "
+echo "EXIT_TIME = $RIGHT_NOW "
 echo "*************************************"
 echo ""

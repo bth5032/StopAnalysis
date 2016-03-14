@@ -45,11 +45,11 @@ int main(int argc, char **argv){
   //
   // Input sanitation
   //
-  if(argc<2){
+  /*if(argc<2){
     cout<<" runBabyMaker takes five arguments: ./runBabyMaker sample_name nevents file_number outpath samplelist" << endl;
     cout<<" Need to provide at least sample_name; nevents=-1 (-1=all events), file_number=-1 (-1=merged_ntuple_*.root), output=/nfs-7/userdata/stopRun2/  samplelist=sample.dat by default"<<endl;
     return 0;
-  }
+  }*/
 
   //
   // Initialize looper
@@ -120,7 +120,7 @@ int main(int argc, char **argv){
   // Use arguments to set run parameters
   //
   int nevents = -1;
-  if(argc>2) nevents = atoi(argv[2]);  
+  /*if(argc>2) nevents = atoi(argv[2]);  
   
   int file=-1;
   if(argc>3) file = atoi(argv[3]);
@@ -135,7 +135,7 @@ int main(int argc, char **argv){
   const char* suffix = file == -1 ? "" : Form("_%i", file);
 
   char *input = "sample.dat";
-  if(argc>5) input = argv[5];
+  if(argc>5) input = argv[5];*/
 
 
   //
@@ -146,14 +146,18 @@ int main(int argc, char **argv){
   vector<TString> samplelist = load(argv[1], filename, input);//new
   for(unsigned int i = 0; i<samplelist.size(); ++i){
     cout << "Add sample " << samplelist[i] << " to files to be processed." << endl;
-    sample->Add(samplelist[i].Data());
-  }
+    sample->Add("/home/users/bhashemi/temp/smartsubmit_testing/IOtest/files/testfile1.root");
+    sample->Add("/home/users/bhashemi/temp/smartsubmit_testing/IOtest/files/testfile13.root");
+    sample->Add("/home/users/bhashemi/temp/smartsubmit_testing/IOtest/files/testfile65.root");
+    sample->Add("/home/users/bhashemi/temp/smartsubmit_testing/IOtest/files/testfile132.root");
+    sample->Add("/home/users/bhashemi/temp/smartsubmit_testing/IOtest/files/testfile222.root");
+}
 
 
   //
   // Run Looper
   //
-  mylooper->looper(sample, Form("%s%s", argv[1],suffix), nevents,dirpath);
+  mylooper->looper(sample, Form("%s%s", "IO TEST SAMPLE","suffix"), nevents,dirpath);
 
 
   //
