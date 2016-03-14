@@ -19,3 +19,6 @@ test_sample_files
 
 #Sublime Files
 *.sublime*
+
+#Batch Files
+batch/forCondor_stopBabyMaker_74x
